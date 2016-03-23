@@ -1,5 +1,5 @@
 {
-    "name": "tbbc/money-bundle",
+    "name": "deruwe/money-bundle",
     "type": "symfony-bundle",
     "description": "This is a Symfony2 bundle that integrates the php money library from Mathias Verraes (Fowler pattern): https://github.com/mathiasverraes/money.",
     "keywords": ["money", "currency", "fowler", "conversion"],
