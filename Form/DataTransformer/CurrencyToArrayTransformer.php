@@ -24,7 +24,7 @@ class CurrencyToArrayTransformer implements DataTransformerInterface
         if (!$value instanceof Currency) {
             throw new UnexpectedTypeException($value, 'Currency');
         }
-        return array("tbbc_name" => $value->getName());
+        return array("tbbc_name" => $value->getCode());
     }
 
     /**
@@ -43,7 +43,7 @@ class CurrencyToArrayTransformer implements DataTransformerInterface
         }
         try {
             return new Currency($value["tbbc_name"]);
-        } catch (UnknownCurrencyException $e) {
+        } catch (\InvalidArgumentException $e) {
             throw new TransformationFailedException($e->getMessage());
         }
     }

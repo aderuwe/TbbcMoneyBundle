@@ -50,7 +50,7 @@ class PairManager
      */
     public function convert(Money $amount, $currencyCode)
     {
-        $ratio = $this->getRelativeRatio($amount->getCurrency()->getName(), $currencyCode);
+        $ratio = $this->getRelativeRatio($amount->getCurrency()->getCode(), $currencyCode);
         $pair = new CurrencyPair($amount->getCurrency(), new Currency($currencyCode), $ratio);
         return $pair->convert($amount);
     }
@@ -67,7 +67,7 @@ class PairManager
             throw new MoneyException("ratio has to be strictly positive");
         }
         $ratioList = $this->storage->loadRatioList(true);
-        $ratioList[$currency->getName()] = $ratio;
+        $ratioList[$currency->getCode()] = $ratio;
         $ratioList[$this->getReferenceCurrencyCode()] = (float) 1;
         $this->storage->saveRatioList($ratioList);
 
@@ -92,13 +92,13 @@ class PairManager
             return (float) 1;
         }
         $ratioList = $this->storage->loadRatioList();
-        if (!array_key_exists($currency->getName(), $ratioList)) {
+        if (!array_key_exists($currency->getCode(), $ratioList)) {
             throw new MoneyException("unknown ratio for currency $currencyCode");
         }
-        if (!array_key_exists($referenceCurrency->getName(), $ratioList)) {
+        if (!array_key_exists($referenceCurrency->getCode(), $ratioList)) {
             throw new MoneyException("unknown ratio for currency $referenceCurrencyCode");
         }
-        return $ratioList[$currency->getName()] / $ratioList[$referenceCurrency->getName()];
+        return $ratioList[$currency->getCode()] / $ratioList[$referenceCurrency->getCode()];
     }
 
     /**

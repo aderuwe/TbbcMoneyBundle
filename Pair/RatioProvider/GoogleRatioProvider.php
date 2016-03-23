@@ -22,16 +22,16 @@ class GoogleRatioProvider implements RatioProviderInterface
     {
         try {
             $baseCurrency = new Currency($referenceCurrencyCode);
-        } catch (UnknownCurrencyException $e) {
+        } catch (\InvalidArgumentException $e) {
             throw new MoneyException(
-                sprintf('The currency code %s does not exists', $referenceCurrencyCode)
+                sprintf('The currency code %s is not valid', $referenceCurrencyCode)
             );
         }
         try {
             $currency = new Currency($currencyCode);
-        } catch (UnknownCurrencyException $e) {
+        } catch (\InvalidArgumentException $e) {
             throw new MoneyException(
-                sprintf('The currency code %s does not exists', $currencyCode)
+                sprintf('The currency code %s is not valid', $currencyCode)
             );
         }
 
@@ -55,8 +55,8 @@ class GoogleRatioProvider implements RatioProviderInterface
         return sprintf(
             'https://www.google.com/finance/converter?a=%s&from=%s&to=%s',
             $units,
-            $referenceCurrency->getName(),
-            $currency->getName()
+            $referenceCurrency->getCode(),
+            $currency->getCode()
         );
     }
 

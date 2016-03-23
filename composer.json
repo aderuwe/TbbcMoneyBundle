@@ -18,7 +18,7 @@
         "php": ">=5.3.3",
         "ext-curl" : "*",
         "symfony/framework-bundle": "~2.3",
-        "mathiasverraes/money": "1.2.*",
+        "mathiasverraes/money": "~3.0@dev",
         "symfony/form": "~2.3",
         "symfony/twig-bundle": "~2.3",
         "symfony/console": "~2.3",
